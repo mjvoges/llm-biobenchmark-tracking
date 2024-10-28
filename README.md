@@ -8,17 +8,17 @@ Evaluations were performed using API's for models hosted through [OpenRouter](ht
 
 ## Approach
 
-- Follow the provided instructions to `git clone` and `pip install -e` FutureHouse's [LAB-bench](https://github.com/Future-House/LAB-Bench) and EleutherAI's [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness).
+- Follow the provided instructions to `git clone` and `pip install -e .` FutureHouse's [LAB-bench](https://github.com/Future-House/LAB-Bench) and EleutherAI's [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness).
 
-- Gather your API's URL and API key. Set these to be environment variables. As an example for a model on OpenRouter, use `export BASE_URL=https://openrouter.ai/api/v1` and `export OPENROUTER_API_KEY=####`. 
+- Gather your API's URL and API key. Set these to be environment variables. As an example for a model on OpenRouter, use `export BASE_URL=https://openrouter.ai/api/v1` and `export OPENROUTER_API_KEY=####` for LAB bench and `export BASE_URL=https://openrouter.ai/api/v1/chat/completions` for lm-evaluation-harness.
 
-- Make small changes to the existing code to call the relevant APIs. This assumes that your API is compatible with the OpenAI API "standard".
+- Some small changes to the existing code to call the relevant APIs. This assumes that your API is compatible with the OpenAI API "standard".
   
   - **ProtocolQA evaluation with LAB-bench**:
     - Navigate to labbench/openai.py and replace `self.client = openai.AsyncOpenAI()` with `self.client = openai.AsyncOpenAI(base_url=os.environ.get("BASE_URL"), api_key=os.environ.get("OPENROUTER_API_KEY")`.
     - Example use: to run an eval with Llama 3.2, call the evalution using
       ```
-      ./score_baselines.py --eval ProtocolQA --provider openai --model meta-llama/llama-3.2-3b-instruct --n_threads 8 --output path/to/outputs/ProtocolQA-meta-llama/llama-3.2-3b-instruct.json
+      ./score_baseline.py --eval ProtocolQA --provider openai --model meta-llama/llama-3.2-3b-instruct --n_threads 8 --output path/to/outputs/ProtocolQA-meta-llama/llama-3.2-3b-instruct.json
       ```
       
   - **GPQA evaluation with lm-evaluation-harness**:
