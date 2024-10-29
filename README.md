@@ -24,6 +24,7 @@ Evaluations were performed using API's for models hosted through [OpenRouter](ht
   - **GPQA evaluation with lm-evaluation-harness**:
     - Navigate to lm_eval/models/openai_completions.py. Under `_create_payload` of the `LocalChatCompletion` class change the format of the request from `"messages": messages` to `"messages": [{"role": "user", "content":messages}]`.
     - Under the `OpenAIChatCompletion` class, replace with `base_url=os.environ.get("BASE_URL")`, and under `api_key`, replace with `key = os.environ.get("OPENROUTER_API_KEY", None)`
+    - Be sure to set `max_tokens` to >8192 in the `_create_payload` function.
     - To evaluate only the biology-related questions from the GPQA benchmark, navigate to lm_eval/tasks/gpqa/cot_zeroshot/utils.py and replace `return dataset.map(_process_doc)` with `return dataset.map(_process_doc).filter(lambda example: example["Subdomain"] in ["Molecular Biology", "Genetics"])`
     - Example use: to run an eval with Llama 3.2, call
       ```
