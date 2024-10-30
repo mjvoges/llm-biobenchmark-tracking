@@ -1,4 +1,4 @@
-# An evaluation of general purpose LLMs on biological benchmarks to extract trendlines.
+# An evaluation of SOA LLMs on biological benchmarks to observe performance trendlines.
 
 ## Description
 

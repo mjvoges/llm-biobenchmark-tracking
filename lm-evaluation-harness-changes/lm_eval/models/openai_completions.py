@@ -139,7 +139,7 @@ class LocalChatCompletion(LocalCompletionsAPI):
             #"messages": messages,
             "messages": [{"role": "user", "content":messages}],
             "model": self.model,
-            "max_tokens": 8192, #max_tokens,
+            "max_tokens": 10000, #max_tokens,
             "temperature": temperature,
             "stop": stop[:4],
             "seed": seed,
