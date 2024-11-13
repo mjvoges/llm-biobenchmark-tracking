@@ -1,4 +1,4 @@
-# An evaluation of SOA LLMs on biological benchmarks to observe performance trendlines.
+# An evaluation of SOTA LLMs on biological benchmarks to observe performance trendlines.
 
 ## Description
 
