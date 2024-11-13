@@ -10,7 +10,7 @@ Evaluations were performed using API's for models hosted through [OpenRouter](ht
 
 - Follow the provided instructions to `git clone` and `pip install -e .` FutureHouse's [LAB-bench](https://github.com/Future-House/LAB-Bench) and EleutherAI's [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness).
 
-- Gather your API's URL and API key. Set these to be environment variables. As an example for a model on OpenRouter, use `export BASE_URL=https://openrouter.ai/api/v1` and `export OPENROUTER_API_KEY=####` for LAB bench and `export BASE_URL=https://openrouter.ai/api/v1/chat/completions` for lm-evaluation-harness.
+- Gather your API's URL and API key. Set these to be environment variables. As an example for a model on OpenRouter, use `export BASE_URL=https://openrouter.ai/api/v1` and `export OPENROUTER_API_KEY=####` for LAB bench (ProtocolQA and CloningStrategies) and `export BASE_URL=https://openrouter.ai/api/v1/chat/completions` for lm-evaluation-harness (GPQA and MMLU).
 
 - Some small changes to the existing code to call the relevant APIs. This assumes that your API is compatible with the OpenAI API "standard".
   
@@ -28,7 +28,11 @@ Evaluations were performed using API's for models hosted through [OpenRouter](ht
     - To evaluate only the biology-related questions from the GPQA benchmark, navigate to lm_eval/tasks/gpqa/cot_zeroshot/utils.py and replace `return dataset.map(_process_doc)` with `return dataset.map(_process_doc).filter(lambda example: example["Subdomain"] in ["Molecular Biology", "Genetics"])`
     - Example use: to run an eval with Llama 3.2, call
       ```
-      lm_eval --model openai-chat-completions --tasks gpqa_main_cot_zeroshot --model_args model=meta-llama/llama-3.2-3b-instruct --output_path path/to/outputs/
+      lm_eval --model openai-chat-completions --tasks gpqa_main_cot_zeroshot --model_args model=openai/gpt-4o --output_path results/ --log_samples
       ```
+  - **MMLU evaluation with lm-evaluation-harness**
+    - Navigate to the .yaml config files of the relevant tasks in MMLU. Append the following to the description text to assure the model returns only the answer letter: "Provide only the letter of the correct answer. Do not include any other text."
+    - Follow the same steps as in the GPQA section above. 
+
 
 Happy evaluating!

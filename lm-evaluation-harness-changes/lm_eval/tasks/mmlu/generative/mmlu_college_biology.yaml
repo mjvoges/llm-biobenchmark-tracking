@@ -1,0 +1,7 @@
+"dataset_name": "college_biology"
+"description": "The following are multiple choice questions (with answers) about college\
+  \ biology. Provide only the letter of the correct answer. Do not include any other text. If you can not answer the question, provide the letter N.\n\n"
+"tag": "mmlu_stem_generative"
+"include": "_default_template_yaml"
+"task": "mmlu_college_biology_generative"
+"task_alias": "college_biology"
